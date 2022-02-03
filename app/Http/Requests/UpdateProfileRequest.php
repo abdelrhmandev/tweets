@@ -29,8 +29,7 @@ class UpdateProfileRequest extends FormRequest
             'email' => ['required', 'email', 'max:100', 'unique:users,email,'. auth()->user()->id],
             'avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
             'cover' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
-            'password' => ['string','min:8','max:255','confirmed',
-            ],
+            'password' => ['string','min:8','max:255','confirmed'],
         ];
     }
 }

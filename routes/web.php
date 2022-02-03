@@ -23,7 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 #Tweets 
 Route::get('/tweets', [App\Http\Controllers\TweetController::class, 'index'])->name('tweets.index');
-Route::get('/tweets/create', [App\Http\Controllers\TweetController::class, 'create'])->name('tweets.create');
+
 Route::post('/tweets', [App\Http\Controllers\TweetController::class, 'store'])->name('tweets.store');
 Route::delete('/delete/tweet/{id}', [App\Http\Controllers\TweetController::class, 'destroy'])->name('tweets.destroy');
 
@@ -31,7 +31,10 @@ Route::delete('/delete/tweet/{id}', [App\Http\Controllers\TweetController::class
 Route::delete('/unfollow/user/{following_user_id}', [App\Http\Controllers\FollowController::class, 'destroy'])->name('follows.destroy');
 Route::post('/follow/user/{following_user_id}', [App\Http\Controllers\FollowController::class, 'store'])->name('follows.store');
 
-#List Users Route "To select user to follow
+
+Route::get('/explore', [App\Http\Controllers\ExploreController::class, 'index'])->name('explore');
+
+
 Route::get('/list/users/{id}', [App\Http\Controllers\TweetController::class, 'list_users'])->name('users.list');
 
 

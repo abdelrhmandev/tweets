@@ -51,7 +51,8 @@ class User extends Authenticatable
  
     public function timeline(){     
         $friends = $this->follows()->pluck('id');              
-        return Tweet::Where('user_id',$this->id)->orWhereIn('user_id',$friends)->latest()->get();
+
+        return Tweet::with('user')->Where('user_id',$this->id)->orWhereIn('user_id',$friends)->orderByDesc('id')->paginate(50);
     }
 
     public function GetUnfollowedUser(){     // Not My freinds + Not me to allow adding follow process
@@ -60,7 +61,7 @@ class User extends Authenticatable
         if(empty($friends->count())) { // for the first time select users
            $friends = [];
         }
-        return User::whereNotIn('id',$friends)->where('id','<>',$this->id)->latest()->get(); 
+        return User::whereNotIn('id',$friends)->where('id','<>',$this->id)->latest()->paginate(50);
     }
     public function isfollowing(User $user){
         return $this->follows()->where('following_user_id',$user->id)->exists();
@@ -72,7 +73,12 @@ class User extends Authenticatable
     }
 
 
+    public function path($append = '')
+    {
+        $path = route('profile', $this->username);
 
+        return $append ? "{$path}/{$append}" : $path;
+    }
 
     public function Getavatar(){
         $src  = "https://i.pravatar.cc/50?u=".$this->email;

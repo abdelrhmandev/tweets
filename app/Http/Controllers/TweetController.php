@@ -21,18 +21,8 @@ class TweetController extends Controller
     public function index()
     {
         $tweets = auth()->user()->timeline();
-        $users =  auth()->user()->GetUnfollowedUser(); // list all users except me and followed users
-        return view('tweets.index',['tweets'=>$tweets,'users'=>$users]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-     return view('tweets.create');
+ 
+        return view('tweets.index',['tweets'=>$tweets]);
     }
 
  
@@ -66,7 +56,7 @@ class TweetController extends Controller
      */
     public function destroy($tweet)
     {
-        $Tweet = Tweet::where('user_id',auth()->user()->id)->findOrFail($tweet); // delete my own tweete Only
+        $Tweet = Tweet::where('user_id',auth()->user()->id)->findOrFail($tweet); // delete my own tweets Only
         $Tweet->delete();
         return redirect()->route('tweets.index')->with('success','tweet Deleted Successfully');
     }
