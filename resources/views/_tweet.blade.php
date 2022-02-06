@@ -1,5 +1,12 @@
 <div class="post">
   <div class="post__avatar">
+
+ 
+
+
+ 
+
+
     <img
       src="{{ $tweet->user->Getavatar() }}"
       alt=""

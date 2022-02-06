@@ -5,6 +5,9 @@
         src="{{ auth()->user()->Getavatar() }}"
         alt="{{ auth()->user()->name }}"
       />
+
+
+  
       <input type="text" name="body" required placeholder="Hello Tweet !!" />
     </div>
     <button class="tweetBox__tweetButton">Tweet</button>
